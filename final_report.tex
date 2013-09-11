@@ -95,8 +95,256 @@ Foundation (WPF) [4]. We have created a basic user interface
 and written the code to read the files, which contain volume
 information for an intersection.
 
+\section{Research}
+\subsection{Existing Application}
+To recreate the existing application, we had to become
+familiar with it. We explored its features and what we liked
+and disliked about it.
+
+The current application has two modes; essentially it is two
+programs in one. One mode displays information on traffic
+volume (the VS mode), the other displays information on the
+traffic light phasing. Because of scope constraints we looked
+only into the traffic volume part of the application. Later if
+time permits, we might look into recreating the phasing part of
+the application.
+
+The VS mode has four different views; a graph view, a
+table view, a column view, and a dump view. The two most
+commonly used views are the graph and table view. We were
+unable to ascertain what the column view is actually used for.
+The dump view gives a human readable representation of a
+volume store file that is very close to how it is encoded. This
+was useful to us when we were learning how to read the files,
+but is unused otherwise.
+
+The graph view shows a line graph with time on the X-axis
+and traffic volume on the Y-axis. Each detector at an
+intersection can have it’s own series or they can be grouped
+together. The time interval can be set between 5 minutes and
+an hour. Data is collected every 5 minutes, so if you increase
+the interval it plots the average.
+
+The graph view is useful for seeing trends in traffic flow.
+For example for some detectors there is a large spike between
+6am and 7am and then it falls off over the rest of the day. We
+can look at this and see that that detector probably heads
+toward the CBD.
+
+The table view displays volume information for 5-minute
+intervals for each hour with hourly totals in the bottom row.
+(See Fig.1) There is a table for both AM and PM traffic with
+the total for each half of the day and the peak amount and
+time. Each approach has its own pair of tables, so like the
+graph view you can group detectors together to get an
+indication of volume for a specific direction. You can change
+the interval to get the totals over that interval.
+The table view is good for finding specific values at
+specific times, but is poor for identifying trends.
+The column view is used only to export data to an Excel
+spreadsheet for further manipulation.
+
+\subsection{Requirements Gathering}
+For this project we have had weekly or fortnightly
+meetings with our client. To begin with these meetings were
+used to gather requirements and to find out more about how
+the existing application works and what it is used for.
+The main use of the existing application is to use the
+volume data for reports. For example, finding the busiest
+intersections for a given month, or finding the busiest time of
+day for different intersections, etc.
+
+We also went to the Auckland Transport office in the
+Auckland CBD. We saw that it is used in tandem with another
+program that directly interfaces with SCATS. The other
+program shows detectors being triggered in pseudo real time
+and shows planned and actual light phasing. Also available to
+them were camera feeds of some of the main intersections.
+Using all of these tools they could identify an intersection
+whose phasing is incorrect or non-optimal and then check the
+volumes of those intersections to see if there are any obviously
+faulty detectors.
+
+The visit to Auckland Transport was instrumental in our
+understanding of what it is we are trying to replicate and
+improve. We were able to identify significantly more use
+cases, from seeing the application in action in the environment
+that it is used in.
+
+\subsection{Platform Choice}
+One of the requirements that the client stressed to us was
+future extensibility of platforms. To make the application
+portable we initially suggested making a web based
+application with a RESTful API [1]. This way it would be
+very easy to introduce new platforms that would only have to
+make use of the API.
+
+The other choice was a windows desktop application that
+loads volume files locally. The main advantage of this
+platform choice would be that there would be significantly less
+architectural work involved and could be developed more
+rapidly. (See Table 1 for pros and cons).
+
+We felt it would be most appropriate to create the
+application as a web service. One of the key criteria expressed
+by Auckland Transport being extensibility, we felt that a web
+service meets this criteria better. Auckland Transport sees this
+project as something that is likely to be extended and
+improved over the years. Using a web service promotes client
+platform in-dependence, which allows Auckland Transport to
+reuse the same program for other platforms such as mobile
+applications.
+
+Ultimately the client decided to go with a standalone
+windows application. This was due to a few factors, the main
+ones being that a web service would take longer to create and
+that AT was reluctant to grant us access to the infrastructure
+required to host such a service.
+
+\section{Current Progress}
+\subsection{Reading the Volume Information}
+The first thing we did after gathering requirements was to
+try to decode the volume information. The data is in binary
+and uses an encoding that aims to reduce file size. (See Figure
+2 for format specification).
+Figure 1 Volume information Figure 1 Table view of existing application data format
+We ran into a few small issues initially when trying to
+interpret the information; the main one being that information
+encoded across multiple bytes was little endian.
+We solved most of our issues like this by printing out a hex
+dump and using pens and highlighters to manually interpret
+the binary information.
+
+\subsection{Designing the User Interface}
+In designing the user interface (UI) for the application we
+decided to create lo-fi prototypes to quickly create a rough
+view of our proposed UI (See Appendices) These were very
+useful for being able to propose UIs to our client and have him
+critique them without us having to spend a lot of time
+developing a full blown UI and then have it be rejected.
+
+\subsection{Application Implementation}
+After we went over the lo-fi prototypes with our client and
+made the changes he required we began to implement the
+actual application using the Microsoft Windows Presentation
+Foundation (WPF)[4]. WPF uses XML files to declaratively
+define a UI and C\# to imperatively bind them to data and
+perform related logic.
+
+My partner and I decided to split the work at this point; I
+would write the code to read the volume information into
+memory and provide an interface for getting specific
+information required for any reporting, while he would realize
+our lo-fi prototypes and create the beginnings of our UI.
+To load the volume information I initially wrote a singleton
+[6] class called VolumeStore that loaded all the information
+from a hard coded file. It did all of the decoding itself and
+stored information in a few Dictionaries [5]. Later I changed
+this and created the abstraction of a Record and a pseudo
+factory [6] that would create a Record given a byte array. Now
+the VolumeStore class is less concerned with decoding the
+binary data and more concerned with representing it in a way
+that is useful to the other components of our application.
+Once my partner had created the basics of a UI, I added a
+menu item that would let you specify which file you wanted to
+load volume information from. Loading the file and decoding
+it is a long running task and initially I was doing it on the UI
+thread, thus blocking the UI and making it unresponsive. The
+C\# standard library provides a class for performing long
+running tasks called BackgroundWorker [7], but, I also wasn’t
+providing any feedback to the user so they would have no
+indication of when the loading had been completed.
+Fortunately, I found a small library called ProgressDialog [3]
+that solved both of these issues.
+
+Once we had a basic UI that could load volume
+information, we needed a way to display it. My partner and I
+decided that I would recreate the graph view of the original
+application and he would recreate the table view. To display
+the data I found a WPF charting library that could display line
+charts. There were a number of very nice looking libraries that
+you could pay for, but I went for a free one called Dynamic
+Data Display (D3) [2]. With it I have been able to display the
+line graph shown in Figure 3.
+
+\section{Future Work}
+\subsection{Graph View}
+Currently the graph view only displays a series for the first
+detector of the first intersection available from the
+VolumeStore instance it receives. So there needs to be some
+sort of configuration information made available to it.
+
+Also, if no data has been loaded into the VolumeStore
+instance, the program will exit with an exception. The
+program should either tell the user that they haven’t loaded
+any volume data, or make it impossible for the graph view to
+be displayed.
+
+\subsection{Table View}
+At the moment the table view displays an empty table and
+so needs to be populated. The approach used to get
+information to the graph view can be reused here to get an
+idea of what’s involved in using data tables in WPF.
+Like the graph view we hope to add some sort of
+highlighting to the table to indicate useful statistics, for
+example, the highest volume detector, the busiest time, etc.
+
+\subsection{Report Configuration}
+In order to recreate the existing functionality of grouping
+detectors into approaches we will implement a screen/view
+similar to Appendix 2. The idea is to provide a drag and drop
+interface for grouping detectors with additional buttons to
+clear all approaches and to distribute each detector to its own
+approach.
+
+This screen will produce some sort of Configuration object
+that we will be able to pass to the graph and table views and
+let them display the data appropriately.
+
+\subsection{Excel Export}
+One of the things that the existing application is used for is
+to simply load the files so that the data can be copied to an
+Excel spreadsheet for doing numerical analysis. We are
+aiming to make this workflow a little smoother by adding the
+ability to export data to a CSV file already formatted, thus
+easing the process of manual copying pasting.
+
+\subsection{Preloading of VS store files}
+Another feature that we’d like to add is to have a directory
+that the application will look into to find VS files and load
+them before the application starts. A splash screen with a
+progress bar can be shown so that the user knows that the
+application is starting.
+
+This means that we can do the long load before the user
+begins interacting with the application, so when they start
+viewing tables and graphs it’s nice and quick. We feel that
+having a “big load upfront” will help with the applications
+perceived performance.
+
+Importing files from another location will copy them to that
+directory as well as loading them into a VolumeStore instance,
+so next time they run the application they won’t have to
+import the file again.
+
+This will be a good opportunity to load configuration files
+that store saved report configurations as well.
+
 \section{Conclusions}
-You might want some of these.
+The advantages of an adaptive traffic system like SCATS
+are many. However it does not solve all problems. Traffic data
+must be collected and examined to make informed decisions
+regarding Auckland’s transportation infrastructure. The
+programs used to view and analyze this data must be effective
+at displaying this data and helping their user identify and
+extract meaningful information from it.
+
+I have outlined the current progress and future work in
+recreating Auckland Transport’s volume reporter. The purpose
+of the recreation being making the tool more usable and more
+effective in displaying volume data to its user so that
+Auckland Transport can make better decisions as to how it
+improves and maintains Auckland’s roads.
 
 
 \bibliographystyle{IEEEtran}
