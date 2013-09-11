@@ -16,8 +16,8 @@
 \usepackage[final]{pdfpages}
 
 
-\title{YOUR TITLE GOES HERE}
-\name{YOUR NAME GOES HERE}
+\title{Traffic Reporter - Final Report}
+\name{Michael Little}
 \address{Department of Electrical and Computer Engineering\\
 University of Auckland, Auckland, New Zealand}
 
@@ -34,58 +34,69 @@ University of Auckland, Auckland, New Zealand}
 
 
 \begin{abstract}
-This is where the abstract goes its a little bit different than a normal section.
+This report describes the initial work and current
+progress of a project to create a new version of software that
+analyses traffic volume through intersections for Auckland
+Transport.
 
-% use more than one line space for a new paragraph
-
-If you don't use sublime text with the \LaTeX tools plugin you are a \#pleb
 \end{abstract}
 
 
 
 \section{Introduction}
 
-Put some text here if you want to get a good grade
+Auckland Transport uses a system that collects the traffic
+volume called SCATS (Sydney Coordinated Adaptive Traffic
+System)\cite{sims1981scat}. It uses the volume information it collects to
+intelligently change the phase lengths of traffic lights. It also
+tries to coordinate sets of traffic lights along a route so that
+cars going in a certain direction, towards the CBD for
+example, will get green lights all the way through. It will also
+drop phases if there aren’t any cars sitting on a detector so that
+other cars won’t have to wait.
 
+The alternative to an adaptive system like SCATS is to have
+fixed phase lengths at every intersection. Using an adaptive
+system has many benefits including reduced travel time,
+reduced fuel usage, and reduced air pollution \cite{sims1981scat}. With travel
+times SCATS consistently matches or outperforms static
+traffic systems \cite{hunter2012probe}.
 
-\section{Section Title}
-You might want to cite some references in your report i hear the markers like that.
-Use \\cite\{[citation name]\} to cite things like this: \cite{coachseye} \cite{kinovea}.
-You will find it auto creates a bibliography at the bottom with all the cites you use in the correct order.
+Problems arise in an adaptive system like SCATS when the
+detectors become faulty which happens fairly often. Faulty
+detectors can report anything from zero volume to an
+impossibly high amount. These false values throw off the
+scheduling of phases.
 
-% \newpage only takes you to the top of the next column, to go to a totally new piece of paper you might need to \newpage's
-\clearpage
-% if you want to get a totally new pice of paper
+Andrew Luey and myself were tasked by Auckland
+Transport (AT) to recreate a piece of their existing software
+that they use to analyze traffic volumes through an
+intersection. The application can look at the volume
+information to identify possibly malfunctioning detectors as
+well as identify trends in traffic flow. It is also commonly used
+to generate reports on traffic volumes on main roads, for
+example average traffic volume over a month, the busiest
+intersections, busiest routes, etc.
 
-\section{Section Two}
-Having multiple sections increase the chance of you getting an A.
-You might want to include picutes as well.
-If you want to quote something use backticks then what you want then a normal double quote.
-e.g. ``Text'' because using normal double quotes looks silly "ASD"
-
-Images look like this
-Include images like this:
-\begin{figure}[!h]
-\centerline{\includegraphics[height=1.8in]{ss1}}
-\caption{Desktop application frame from video stream}
-\label{fig:rawFrame}
-\end{figure}
-
-
-You can put images at different places on the page by changing the thing after \textbackslash begin\{figure\}[!h].
-``!h'' is for Here, and will place it in the page right there.
-``!t'' is for Top, and will place it at the top of the column.
-``!b'' is for Bottom, and will place it at the bottom of the column.
-changing \{figure\} to \{figure*\} will let the figure span the entire page.
-You can refrence pages using \textbackslash ref\{label\} \ref{fig:rawFrame}.
-
-
-
-
+Their existing piece of software is old (written in the
+1980’s) and has limitations in what it can do as well as
+suffering from a few usability issues that are symptomatic of
+when it was written.
+To recreate the application we began by doing research into
+the appropriate platform for the new application because the
+client expressed an interest in being able to eventually view
+volume information on a smartphone or tablet. We became
+familiar with the existing application to see what functionality
+we had to duplicate, as well as to see what features were
+lacking or could be improved upon.
+Currently we are in the middle of implementing the new
+application using C\# and the Microsoft Windows Presentation
+Foundation (WPF) [4]. We have created a basic user interface
+and written the code to read the files, which contain volume
+information for an intersection.
 
 \section{Conclusions}
 You might want some of these.
-
 
 
 \bibliographystyle{IEEEtran}
