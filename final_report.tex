@@ -193,13 +193,18 @@ architectural work involved and could be developed more
 rapidly.
 
 Due to time constraints and infrastructure requirements, with our client we decided to implement a Windows application.
-In creating this we had a number of options available to us; but the two most promising were to write the application using Java and the Swing GUI Framework \cite{swing}
+In creating this we had a number of options available to us; but the two most promising were to write the application using Java and the Swing GUI Framework \cite{swing} or C\# with the Windows Presentation Foundation (WPF) \cite{wpf}.
+
+We were more familiar with Java and Swing but we thought that as we were creating a Windows application, why not use a language and framework tailor made to making one? Also WPF has some very interesting data binding capabilities that we wanted to investigate, so we chose to use that combination.
+
+In the original Traffic Reporter asks you to import volume data files each time you run the application. We initially took this approach, but found that loading these files each time became annoying as it took at least 30 seconds per file. So we decided to have a one time import into a database. We chose SQLite \cite{sqlite} as we thought that the scale of our application was appropriate for a file based database rather than a server based one.
 
 \section{Traffic Reporter 2013}
 \subsection{Improved Features}
 \subsubsection{Configuration Screen}
 \subsubsection{Table View}
 \subsubsection{Graph View}
+\subsubsection{Importing Files}
 \subsection{New Features}
 \subsubsection{Suspected Faults}
 \subsubsection{Summaries}
