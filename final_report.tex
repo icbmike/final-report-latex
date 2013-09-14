@@ -45,11 +45,51 @@ According to the 2006 census, travel by car accounted for 48\% of travel and 44\
 There is limited ability for Auckland to expand its road network so Auckland transport should focus on making their current road infrastructure more effective. A better understanding of Auckland's traffic would lead to better city planning and traffic optimization.
 
 \subsection{Background}
+
 At an intersection with traffic lights, under each lane there are inductive loops that can detect when a vehicle travels over them. Every 5 minutes these detectors send their counts to that intersection's traffic controller. The traffic controller sends the volume data to Auckland's SCATS server \cite{sims1981scat}. 
 
-The SCATS server can use this volume data to adjust traffic light phases to suit the traffic trends. For example if there is a large volume of traffic headed towards the city centre at a certain intersection, the next intersection will have longer green phases for cars travelling in that direction. While SCATS does lag behind actual traffic trends by 5 minutes, automatically adjusted traffic phases have been shown to be more efficient than statically phased intersections.
+\begin{figure}[!t]
+\centerline{\includegraphics[height=1.8in]{background}}
+\caption{Flow diagram of a single intersection}
+\label{fig:background}
+\end{figure}
 
-As well as adjusting the traffic light phases, the SCATS server also saves the volume data to a data server where it is available for later viewing and analysis in binary *.vs files. Auckland Transport's traffic engineers use an application called Traffic Reporter which can open these files and view the data in a table or graph view. 
+The SCATS server can use this volume data to adjust traffic light phases to suit the traffic trends \ref{fig:background}. For example if there is a large volume of traffic headed towards the city centre at a certain intersection, the next intersection will have longer green phases for cars travelling in that direction. While SCATS does lag behind actual traffic trends by 5 minutes, automatically adjusted traffic phases have been shown to be more efficient than statically phased intersections.
+
+As well as adjusting the traffic light phases, the SCATS server also saves the volume data to a data server where it is available for later viewing and analysis in binary *.vs files. Auckland Transport's traffic engineers use an application called Traffic Reporter which can open these files and view the data in a table or graph view.
+
+
+
+\section{Requirements}
+\subsection{Requirements Gathering}
+For this project we have had weekly or fortnightly
+meetings with our client. To begin with these meetings were
+used to gather requirements and to find out more about how
+the existing application works and what it is used for.
+The main use of the existing application is to use the
+volume data for reports. For example, finding the busiest
+intersections for a given month, or finding the busiest time of
+day for different intersections, etc.
+
+We also went to the Auckland Transport office in the
+Auckland CBD. We saw that it is used in tandem with another
+program that directly interfaces with SCATS. The other
+program shows detectors being triggered in pseudo real time
+and shows planned and actual light phasing. Also available to
+them were camera feeds of some of the main intersections.
+Using all of these tools they could identify an intersection
+whose phasing is incorrect or non-optimal and then check the
+volumes of those intersections to see if there are any obviously
+faulty detectors.
+
+The visit to Auckland Transport was instrumental in our
+understanding of what it is we are trying to replicate and
+improve. We were able to identify significantly more use
+cases, from seeing the application in action in the environment
+that it is used in.
+
+\subsection{Functional Requirements}
+\subsection{Non-Functional Requirements}
 
 \section{Research}
 \subsection{Existing Application}
@@ -100,7 +140,7 @@ specific times, but is poor for identifying trends.
 The column view is used only to export data to an Excel
 spreadsheet for further manipulation.
 
-\subsection{Platform Choice}
+\subsection{Potential Solutions}
 One of the requirements that the client stressed to us was
 future extensibility of platforms. To make the application
 portable we initially suggested making a web based
@@ -129,37 +169,6 @@ windows application. This was due to a few factors, the main
 ones being that a web service would take longer to create and
 that AT was reluctant to grant us access to the infrastructure
 required to host such a service.
-
-\section{Requirements}
-\subsection{Requirements Gathering}
-For this project we have had weekly or fortnightly
-meetings with our client. To begin with these meetings were
-used to gather requirements and to find out more about how
-the existing application works and what it is used for.
-The main use of the existing application is to use the
-volume data for reports. For example, finding the busiest
-intersections for a given month, or finding the busiest time of
-day for different intersections, etc.
-
-We also went to the Auckland Transport office in the
-Auckland CBD. We saw that it is used in tandem with another
-program that directly interfaces with SCATS. The other
-program shows detectors being triggered in pseudo real time
-and shows planned and actual light phasing. Also available to
-them were camera feeds of some of the main intersections.
-Using all of these tools they could identify an intersection
-whose phasing is incorrect or non-optimal and then check the
-volumes of those intersections to see if there are any obviously
-faulty detectors.
-
-The visit to Auckland Transport was instrumental in our
-understanding of what it is we are trying to replicate and
-improve. We were able to identify significantly more use
-cases, from seeing the application in action in the environment
-that it is used in.
-
-\subsection{Functional Requirements}
-\subsection{Non-Functional Requirements}
 
 \section{Traffic Reporter 2013}
 \subsection{Improved Features}
