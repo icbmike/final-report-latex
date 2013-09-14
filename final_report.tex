@@ -46,7 +46,7 @@ There is limited ability for Auckland to expand its road network so Auckland tra
 
 \subsection{Background}
 
-At an intersection with traffic lights, under each lane there are inductive loops that can detect when a vehicle travels over them. Every 5 minutes these detectors send their counts to that intersection's traffic controller. The traffic controller sends the volume data to Auckland's SCATS server \cite{sims1981scat}. 
+At an intersection with traffic lights, under each lane there are inductive loops that can detect when a vehicle travels over them. Every 5 minutes these detectors send their counts to that intersection's traffic controller. The traffic controller sends the volume data to Auckland's SCATS server \cite{sims1981scat}. See Figure \ref{fig:background}. 
 
 \begin{figure}[!t]
 \centerline{\includegraphics[height=1.8in]{background}}
@@ -54,10 +54,9 @@ At an intersection with traffic lights, under each lane there are inductive loop
 \label{fig:background}
 \end{figure}
 
-The SCATS server can use this volume data to adjust traffic light phases to suit the traffic trends \ref{fig:background}. For example if there is a large volume of traffic headed towards the city centre at a certain intersection, the next intersection will have longer green phases for cars travelling in that direction. While SCATS does lag behind actual traffic trends by 5 minutes, automatically adjusted traffic phases have been shown to be more efficient than statically phased intersections.
+The SCATS server can use this volume data to adjust traffic light phases to suit the traffic trends. For example if there is a large volume of traffic headed towards the city centre at a certain intersection, the next intersection will have longer green phases for cars travelling in that direction. While SCATS does lag behind actual traffic trends by 5 minutes, automatically adjusted traffic phases have been shown to be more efficient than statically phased intersections.
 
 As well as adjusting the traffic light phases, the SCATS server also saves the volume data to a data server where it is available for later viewing and analysis in binary *.vs files. Auckland Transport's traffic engineers use an application called Traffic Reporter which can open these files and view the data in a table or graph view.
-
 
 
 \section{Requirements}
