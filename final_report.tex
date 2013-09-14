@@ -120,9 +120,7 @@ The current application has two modes; essentially it is two
 programs in one. One mode displays information on traffic
 volume (the VS mode), the other displays information on the
 traffic light phasing. Because of scope constraints we looked
-only into the traffic volume part of the application. Later if
-time permits, we might look into recreating the phasing part of
-the application.
+only into the traffic volume part of the application. 
 
 The VS mode has four different views; a graph view, a
 table view, a column view, and a dump view. The two most
@@ -142,7 +140,7 @@ the interval it plots the average.
 
 \begin{figure}[!t]
 \centerline{\includegraphics[height=2.3in]{oldGraph}}
-\caption{Screenshot of graph view from original Traffic Reporter}
+\caption{Screenshot of the graph view from the original Traffic Reporter}
 \label{fig:oldGraph}
 \end{figure}
 
@@ -151,6 +149,12 @@ For example for some detectors there is a large spike between
 6am and 7am and then it falls off over the rest of the day. We
 can look at this and see that that detector probably heads
 toward the CBD.
+
+\begin{figure}[!b]
+\centerline{\includegraphics[height=2.3in]{oldTable}}
+\caption{Screenshot of the table view from the original Traffic Reporter}
+\label{fig:oldTable}
+\end{figure}
 
 The table view displays volume information for 5-minute
 intervals for each hour with hourly totals in the bottom row
@@ -165,11 +169,16 @@ specific times, but is poor for identifying trends.
 The column view is used only to export data to an Excel
 spreadsheet for further manipulation.
 
-\begin{figure}[!b]
-\centerline{\includegraphics[height=2.3in]{oldTable}}
-\caption{Screenshot of table view from original Traffic Reporter}
-\label{fig:oldTable}
+\begin{figure}[!t]
+\centerline{\includegraphics[height=2.3in]{oldConfig}}
+\caption{Screenshot of the configuration screen from the original Traffic Reporter}
+\label{fig:oldConfig}
 \end{figure}
+
+
+To select what intersection is displayed in any of these views you use the configuration screen, which is essentially a wizard that displays when the application starts after loading a volume file (See Figure \ref{fig:oldConfig}).
+
+
 
 \subsection{Potential Solutions}
 One of the requirements that the client stressed to us was
