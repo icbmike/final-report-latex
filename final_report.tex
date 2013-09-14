@@ -32,10 +32,6 @@ University of Auckland, Auckland, New Zealand}
 \maketitle
 
 \begin{abstract}
-This report describes the initial work and current
-progress of a project to create a new version of software that
-analyses traffic volume through intersections for Auckland
-Transport\cite{sims1981scat}.
 
 \end{abstract}
 
@@ -44,11 +40,12 @@ Transport\cite{sims1981scat}.
 Auckland Transport has an application that they use to view and analyse traffic volume. The application was last updated in 2007 and is lacking in features and usability. My partner and I were tasked with recreating this application using modern technologies with the goal of improving the features already existing in the application, and adding new features.
 
 \subsection{Motivation}
-According to the 2006 census, travel by car accounted for 48\% of travel and 44\% of travel was by public transport. Up to 2030 60\% of New Zealand's population growth is going to occur in Auckland. In terms of numbers of trips, in 2006 there were approximately 4 million trips per day in Auckland. This number is projected to grow to 5.5 million trips per day in 2041. 
+According to the 2006 census, travel by car accounted for 48\% of travel and 44\% of travel was by public transport. Up to 2030 60\% of New Zealand's population growth is going to occur in Auckland. In terms of numbers of trips, in 2006 there were approximately 4 million trips per day in Auckland. This number is projected to grow to 5.5 million trips per day in 2041.
 
-There is limited ability for Auckland to expand their road network so Auckland transport should focus on making their current road infrastructure more effective. A better understanding of Auckland's traffic would lead to better city planning and traffic optimization.
+There is limited ability for Auckland to expand its road network so Auckland transport should focus on making their current road infrastructure more effective. A better understanding of Auckland's traffic would lead to better city planning and traffic optimization.
 
 \subsection{Background}
+At an intersection with traffic lights, under each lane there are inductive loops that can detect when a vehicle travels over them. Every 5 minutes these detectors send their counts to that intersection's traffic controller. The traffic controller sends the volume data to Auckland's SCATS server \cite{sims1981scat}.
 
 \section{Research}
 \subsection{Existing Application}
