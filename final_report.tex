@@ -108,7 +108,7 @@ As the project progressed and time and scope allowed for more features we were g
 
 In our initial meetings there was a big focus on when recreating the application to make it extensible, so that after we had finished the project could be picked up by someone else and continue to work on with little effort.
 
-One of the complaints about the original Traffic Reporter is that it is lacking in aesthetics and usability. One of our client's intentions in having the program recreated was to make it more usable and bring it up to modern standards.
+One of the complaints about the original Traffic Reporter is that it is lacking in aesthetics and usability. One of our client's intentions in having the program recreated was to make it more usable and bring it up to modern standards. 
 
 \section{Research}
 \subsection{Existing Application}
@@ -175,14 +175,14 @@ spreadsheet for further manipulation.
 \label{fig:oldConfig}
 \end{figure}
 
-To select what intersection is displayed in any of these views you use the configuration screen, which is essentially a wizard that displays when the application starts after loading a volume file (See Figure \ref{fig:oldConfig}).
+To select what intersection is displayed in any of these views you use the configuration screen, which is essentially a wizard that displays when the application starts after loading a volume file (See Figure \ref{fig:oldConfig}). To select the intersection is confusing, as it combines both a list item selection and check boxes. Once you have selected an intersection you can group detectors into approaches using a table of radio buttons. Also the window for the wizard cannot be resized, so you're limited to viewing only 5 approaches at a time.
 
 
 \subsection{Potential Solutions}
 One of the requirements that the client stressed to us was
 future extensibility of platforms. To make the application
 portable we initially suggested making a web based
-application with a RESTful API [1]. This way it would be
+application with a RESTful API \cite{fielding2002principled}. This way it would be
 very easy to introduce new platforms that would only have to
 make use of the API.
 
@@ -190,23 +190,10 @@ The other choice was a windows desktop application that
 loads volume files locally. The main advantage of this
 platform choice would be that there would be significantly less
 architectural work involved and could be developed more
-rapidly. (See Table 1 for pros and cons).
+rapidly.
 
-We felt it would be most appropriate to create the
-application as a web service. One of the key criteria expressed
-by Auckland Transport being extensibility, we felt that a web
-service meets this criteria better. Auckland Transport sees this
-project as something that is likely to be extended and
-improved over the years. Using a web service promotes client
-platform in-dependence, which allows Auckland Transport to
-reuse the same program for other platforms such as mobile
-applications.
-
-Ultimately the client decided to go with a standalone
-windows application. This was due to a few factors, the main
-ones being that a web service would take longer to create and
-that AT was reluctant to grant us access to the infrastructure
-required to host such a service.
+Due to time constraints and infrastructure requirements, with our client we decided to implement a Windows application.
+In creating this we had a number of options available to us; but the two most promising were to write the application using Java and the Swing GUI Framework \cite{swing}
 
 \section{Traffic Reporter 2013}
 \subsection{Improved Features}
