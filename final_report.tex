@@ -133,12 +133,18 @@ volume store file that is very close to how it is encoded. This
 was useful to us when we were learning how to read the files,
 but is unused otherwise.
 
-The graph view shows a line graph with time on the X-axis
+The graph view (See Figure \ref{fig:oldGraph}) shows a line graph with time on the X-axis
 and traffic volume on the Y-axis. Each detector at an
 intersection can have it’s own series or they can be grouped
 together. The time interval can be set between 5 minutes and
 an hour. Data is collected every 5 minutes, so if you increase
 the interval it plots the average.
+
+\begin{figure}[!t]
+\centerline{\includegraphics[height=2.3in]{oldGraph}}
+\caption{Screenshot of graph view from original Traffic Reporter}
+\label{fig:oldGraph}
+\end{figure}
 
 The graph view is useful for seeing trends in traffic flow.
 For example for some detectors there is a large spike between
@@ -147,8 +153,8 @@ can look at this and see that that detector probably heads
 toward the CBD.
 
 The table view displays volume information for 5-minute
-intervals for each hour with hourly totals in the bottom row.
-(See Fig.1) There is a table for both AM and PM traffic with
+intervals for each hour with hourly totals in the bottom row
+(See Figure \ref{fig:oldTable}). There is a table for both AM and PM traffic with
 the total for each half of the day and the peak amount and
 time. Each approach has its own pair of tables, so like the
 graph view you can group detectors together to get an
@@ -158,6 +164,12 @@ The table view is good for finding specific values at
 specific times, but is poor for identifying trends.
 The column view is used only to export data to an Excel
 spreadsheet for further manipulation.
+
+\begin{figure}[!b]
+\centerline{\includegraphics[height=2.3in]{oldTable}}
+\caption{Screenshot of table view from original Traffic Reporter}
+\label{fig:oldTable}
+\end{figure}
 
 \subsection{Potential Solutions}
 One of the requirements that the client stressed to us was
