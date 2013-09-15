@@ -231,14 +231,24 @@ The overview statistics lists the busiest approach with the corresponding volume
 \subsubsection{Graph View}
 In the new graph view there are a few small improvements over the original. In the original some of the colours used for the series didn't contrast enough against the white background, and so were difficult to see. We limited the set of colours for series to colours that contrasted against white. We also added added the ability to toggle different series on the graph. When a series is hidden the graph resizes its axes for an optimal fit. Error values for faulty detectors are represented by the number 2047, so significantly dwarf other values. Toggling series with errors in them allows the other series to be viewed more easily.
 
-\begin{figure}[!b]
+\begin{figure}[!t]
 \centerline{\includegraphics[width=3.1in]{newGraph}}
 \caption{Screenshot of the graph view from Traffic Reporter 2013}
 \label{fig:newGraph}
 \end{figure}
 
 \subsubsection{Importing Files}
+In the original application you would have to specify the file you want to read from (A single file contains a data for 24 hours). We went with this approach to begin with, but found that reading the same file every time we ran the application was time wasted. We decided that we would do a one time import into a database.
 
+To import the files into the database and store meaningful values we needed to decode the binary data in the files (See Figure \ref{fig:vsDataFormat} for data format). From the decoded data we insert each volume count as a row into the volumes table with a datetime, intersection, detector number and corresponding volume. The datetime, intersection and detector number can uniquely identify a volume count.
+
+\begin{figure}[!b]
+\centerline{\includegraphics[width=3.1in]{volumeDataFormat}}
+\caption{Format of a volume record in a *.vs file}
+\label{fig:vsDataFormat}
+\end{figure}
+
+When importing some data files, we found that they sometimes contained duplicate data. This caused errors because key constraints were being violated. This was indistinguishable from when the user tried to import the same file twice and we needed some way for the user to indicate what should happen in case of a duplicate. As such whenever this occurs, by default the user is asked if they wish to skip this file, skip all files (Traffic Reporter 2013 can do batch importing), or continue processing the file. There is a user setting that lets you set the default option, skip, continue, or ask every time. Specifying a default option lets the user leave the application importing a large amount of files overnight, which is important because one file can take upwards of a minute to be processed, longer if there are duplicates.
 
 \subsection{New Features}
 \subsubsection{Suspected Faults}
