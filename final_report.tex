@@ -284,7 +284,7 @@ Currently Auckland Transport relies on angry motorists calling and telling them 
 The Faults mode (See Figure \ref{fig:faults}) lists all of the detectors grouped by intersection that have volume over the threshold in the date range specified in the Toolbar. The threshold defaults to 100 (the theoretical maximum volume in a 5 minute period) but can be changed.
 
 \subsubsection{Summaries}
-One of the ways the original application was used was to copy data from the table or column view and paste it into Microsoft Excel for further caluclations and analysis. One of the common calculations was the average of certain stats over a month. The intention of the summary mode is to bring some of the calculations into Traffic Reporter to remove the tedious and time consuming task of copying and pasting statistics one day at a time.
+One of the ways the original application was used was to copy data from the table or column view and paste it into Microsoft Excel for further calculations and analysis. One of the common calculations was the average of certain stats over a month. The intention of the summary mode is to bring some of the calculations into Traffic Reporter to remove the tedious and time consuming task of copying and pasting statistics one day at a time.
 
 In Summary mode we have three calculated statistics; daily total volume, AM peak hour total volume, PM peak hour total volume. These are displayed per day per route.
 
@@ -305,10 +305,34 @@ The summary configuration screen lets you specify routes using a DataGrid, enter
 \end{figure}
 
 \subsubsection{CSV Exporting}
+While we were able to bring some analysis back into Traffic Reporter, we knew that it would be tedious to bring all that functionality into the application. We wanted it to be easy to do further analysis in Excel so we added the ability to easily export to a CSV format. We added this ability for summaries and reports. 
+
+An exported report has the same layout as the table view in the application. An exported summary is not exactly identical to what you would see on a summary view, it also includes the configuration table which has the inbound and outbound dividing factors (See Figure \ref{fig:summaryCSV}).
+
+Exporting to CSV lets traffic engineers have the workflow of doing further analysis in Excel without the tediousness of copying and pasting individual days' statistics. 
+
+\begin{figure}[!t]
+\centerline{\includegraphics[width=3.1in]{summaryCSV}}
+\caption{Screenshot of exported summary}
+\label{fig:summaryCSV}
+\end{figure}
 
 \section{Architecture}
-\subsection{Presentation Logic}
+Our architecture can be described as comprising of two essential parts; a data source, and presentation logic. See Figure \ref{fig:architecture} for a view of Traffic Reporter 2013's architecture.
+
+\begin{figure}[!b]
+\centerline{\includegraphics[width=3.1in]{architecture}}
+\caption{View of application architecture}
+\label{fig:architecture}
+\end{figure}
+
 \subsection{Data Sources}
+Because there was a major focus on extensibility from our client and we originally wanted to create a web service, we abstracted the way our application gets its volume data and configurations. We do this using an interface appropriately called DataSource. This interface has methods for retrieving volume counts for a detector at a datetime, getting a list of intersections, getting a configuration by its name, etc. In our application we created an implementation of this interface that communicates with an SQLite database.
+
+If we later wanted to switch to retrieving data from a web service we would
+
+\subsection{Presentation Logic}
+
 \section{Reflections}
 \section{Conclusions}
 
