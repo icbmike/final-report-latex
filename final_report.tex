@@ -202,7 +202,9 @@ In the original Traffic Reporter asks you to import volume data files each time 
 \section{Traffic Reporter 2013}
 \subsection{Improved Features}
 In Traffic Reporter 2013 there were a number of features from the original application that we thought we could improve on. This section details the improvements and changes we made per feature in the original application.
-\subsubsection{Configuration Screen}In the configuration screen we really wanted to improve on the usability and efficiency. In the original application the configuration screen uses a table of radio buttons to group detectors. The window cannot be resized so you can only view 5 approaches at a time. In our screen (See Figure \ref{fig:newConfig}) there is a lot more space available and we use a drag and drop interface to group detectors into approaches. 
+
+\subsubsection{Configuration Screen}
+In the configuration screen we really wanted to improve on the usability and efficiency. In the original application the configuration screen uses a table of radio buttons to group detectors. The window cannot be resized so you can only view 5 approaches at a time. In our screen (See Figure \ref{fig:newConfig}) there is a lot more space available and we use a drag and drop interface to group detectors into approaches. 
 
 \begin{figure}[!b]
 \centerline{\includegraphics[width=3.1in]{newConfig}}
@@ -215,8 +217,29 @@ At the top you can enter the name of your configuration. To the left is a drop-d
 At the bottom left of the screen are two buttons for convenience. The button titled ``Group All'' puts all detectors into a single approach named ``All Detectors''. The button titled ``Distribute Detectors'' puts each detector into its own Approach named ``Group *'' (where * is the number of the detector). These buttons were one of the major improvements over the previous version of Traffic Reporter because traffic engineers would often waste time with the table of buttons based interface grouping detectors in these ways.
 
 \subsubsection{Table View}
+In the table view of the original Traffic Reporter the data was represented by two ASCII tables per approach, one each for AM and PM. With each table were additional statistics; the total traffic volume, the peak volume and period. 
+
+To improve upon this we created a view (See Figure \ref{fig:newTable}) that used a data grid control and added an overview of statistics over all approaches. Given that we had more screen space we also combined the AM and PM tables into one table spanning 24 hours.
+The overview statistics lists the busiest approach with the corresponding volume count, the busiest AM and PM periods of all the approaches and their volume counts.
+
+\begin{figure}[!t]
+\centerline{\includegraphics[width=3.1in]{newTable}}
+\caption{Screenshot of the table view from Traffic Reporter 2013}
+\label{fig:newTable}
+\end{figure}
+
 \subsubsection{Graph View}
+In the new graph view there are a few small improvements over the original. In the original some of the colours used for the series didn't contrast enough against the white background, and so were difficult to see. We limited the set of colours for series to colours that contrasted against white. We also added added the ability to toggle different series on the graph. When a series is hidden the graph resizes its axes for an optimal fit. Error values for faulty detectors are represented by the number 2047, so significantly dwarf other values. Toggling series with errors in them allows the other series to be viewed more easily.
+
+\begin{figure}[!b]
+\centerline{\includegraphics[width=3.1in]{newGraph}}
+\caption{Screenshot of the graph view from Traffic Reporter 2013}
+\label{fig:newGraph}
+\end{figure}
+
 \subsubsection{Importing Files}
+
+
 \subsection{New Features}
 \subsubsection{Suspected Faults}
 \subsubsection{Summaries}
