@@ -17,7 +17,7 @@
 
 
 \title{Traffic Reporter - Final Report}
-\name{Michael Little}
+\name{Mike Little}
 \address{Department of Electrical and Computer Engineering\\
 University of Auckland, Auckland, New Zealand}
 
@@ -201,7 +201,19 @@ In the original Traffic Reporter asks you to import volume data files each time 
 
 \section{Traffic Reporter 2013}
 \subsection{Improved Features}
-\subsubsection{Configuration Screen}
+In Traffic Reporter 2013 there were a number of features from the original application that we thought we could improve on. This section details the improvements and changes we made per feature in the original application.
+\subsubsection{Configuration Screen}In the configuration screen we really wanted to improve on the usability and efficiency. In the original application the configuration screen uses a table of radio buttons to group detectors. The window cannot be resized so you can only view 5 approaches at a time. In our screen (See Figure \ref{fig:newConfig}) there is a lot more space available and we use a drag and drop interface to group detectors into approaches. 
+
+\begin{figure}[!b]
+\centerline{\includegraphics[width=3.1in]{newConfig}}
+\caption{Screenshot of the configuration screen from Traffic Reporter 2013}
+\label{fig:newConfig}
+\end{figure}
+
+At the top you can enter the name of your configuration. To the left is a drop-down box which will list the intersections you have volume data imported for. When you select an intersection the list view below is populated with the detectors for that intersection. From that list view you can select multiple detectors and drop them either onto the plus sign to create a new approach control, or onto an existing approach control. Each approach control has a name and detectors can be dragged and dropped between them. The approach control was a custom control we created for the configuration screen.
+
+At the bottom left of the screen are two buttons for convenience. The button titled ``Group All'' puts all detectors into a single approach named ``All Detectors''. The button titled ``Distribute Detectors'' puts each detector into its own Approach named ``Group *'' (where * is the number of the detector). These buttons were one of the major improvements over the previous version of Traffic Reporter because traffic engineers would often waste time with the table of buttons based interface grouping detectors in these ways.
+
 \subsubsection{Table View}
 \subsubsection{Graph View}
 \subsubsection{Importing Files}
