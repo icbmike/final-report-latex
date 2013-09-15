@@ -284,6 +284,13 @@ Currently Auckland Transport relies on angry motorists calling and telling them 
 The Faults mode (See Figure \ref{fig:faults}) lists all of the detectors grouped by intersection that have volume over the threshold in the date range specified in the Toolbar. The threshold defaults to 100 (the theoretical maximum volume in a 5 minute period) but can be changed.
 
 \subsubsection{Summaries}
+One of the ways the original application was used was to copy data from the table or column view and paste it into Microsoft Excel for further caluclations and analysis. One of the common calculations was the average of certain stats over a month. The intention of the summary mode is to bring some of the calculations into Traffic Reporter to remove the tedious and time consuming task of copying and pasting statistics one day at a time.
+
+In Summary mode we have three calculated statistics; daily total volume, AM peak hour total volume, PM peak hour total volume. These are displayed per day per route.
+
+A route is a collection of detectors for an inbound and outbound intersection. These routes are specified using the summary configuration screen (See Figure \ref{fig:summaryConfig}).
+
+The summary configuration screen lets you specify routes using a DataGrid, entering data into a row in the table will create another empty row below it, letting you create a summary with multiple routes. The inbound and outbound dividing factors are used for when summaries are exported in a CSV format.
 
 \begin{figure}[!b]
 \centerline{\includegraphics[width=3.1in]{summary}}
