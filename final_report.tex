@@ -200,13 +200,28 @@ We were more familiar with Java and Swing but we thought that as we were creatin
 In the original Traffic Reporter asks you to import volume data files each time you run the application. We initially took this approach, but found that loading these files each time became annoying as it took at least 30 seconds per file. So we decided to have a one time import into a database. We chose SQLite \cite{sqlite} as we thought that the scale of our application was appropriate for a file based database rather than a server based one.
 
 \section{Traffic Reporter 2013}
+
+\subsection{Overview}
+
+In Figure \ref{fig:overview} we can see a screenshot of Traffic Reporter 2013. At the top we have the Toolbar which lets you switch between the various modes of the application. 
+
+We have four different modes; the Home mode, which lets you view the days for which you have imported data, the Summary mode that lets you view average statistics for multiple days, the Reports mode which lets you view tables and graphs like the original application, and the Faults mode which lets you view detectors which are suspected to be faulty.
+
+On the left is the Report Browser which is used by both the Summary Mode and the Reports Mode. It lets you select the displayed report or summary and create new ones.
+
+\begin{figure}[!h]
+\centerline{\includegraphics[width=3.1in]{overview}}
+\caption{Screenshot of the configuration screen from Traffic Reporter 2013}
+\label{fig:overview}
+\end{figure}
+
 \subsection{Improved Features}
 In Traffic Reporter 2013 there were a number of features from the original application that we thought we could improve on. This section details the improvements and changes we made per feature in the original application.
 
 \subsubsection{Configuration Screen}
 In the configuration screen we really wanted to improve on the usability and efficiency. In the original application the configuration screen uses a table of radio buttons to group detectors. The window cannot be resized so you can only view 5 approaches at a time. In our screen (See Figure \ref{fig:newConfig}) there is a lot more space available and we use a drag and drop interface to group detectors into approaches. 
 
-\begin{figure}[!b]
+\begin{figure}[!t]
 \centerline{\includegraphics[width=3.1in]{newConfig}}
 \caption{Screenshot of the configuration screen from Traffic Reporter 2013}
 \label{fig:newConfig}
@@ -231,7 +246,7 @@ The overview statistics lists the busiest approach with the corresponding volume
 \subsubsection{Graph View}
 In the new graph view there are a few small improvements over the original. In the original some of the colours used for the series didn't contrast enough against the white background, and so were difficult to see. We limited the set of colours for series to colours that contrasted against white. We also added added the ability to toggle different series on the graph. When a series is hidden the graph resizes its axes for an optimal fit. Error values for faulty detectors are represented by the number 2047, so significantly dwarf other values. Toggling series with errors in them allows the other series to be viewed more easily.
 
-\begin{figure}[!t]
+\begin{figure}[!b]
 \centerline{\includegraphics[width=3.1in]{newGraph}}
 \caption{Screenshot of the graph view from Traffic Reporter 2013}
 \label{fig:newGraph}
@@ -242,16 +257,32 @@ In the original application you would have to specify the file you want to read 
 
 To import the files into the database and store meaningful values we needed to decode the binary data in the files (See Figure \ref{fig:vsDataFormat} for data format). From the decoded data we insert each volume count as a row into the volumes table with a datetime, intersection, detector number and corresponding volume. The datetime, intersection and detector number can uniquely identify a volume count.
 
-\begin{figure}[!b]
+\begin{figure}[!t]
 \centerline{\includegraphics[width=3.1in]{volumeDataFormat}}
 \caption{Format of a volume record in a *.vs file}
 \label{fig:vsDataFormat}
 \end{figure}
 
-When importing some data files, we found that they sometimes contained duplicate data. This caused errors because key constraints were being violated. This was indistinguishable from when the user tried to import the same file twice and we needed some way for the user to indicate what should happen in case of a duplicate. As such whenever this occurs, by default the user is asked if they wish to skip this file, skip all files (Traffic Reporter 2013 can do batch importing), or continue processing the file. There is a user setting that lets you set the default option, skip, continue, or ask every time. Specifying a default option lets the user leave the application importing a large amount of files overnight, which is important because one file can take upwards of a minute to be processed, longer if there are duplicates.
+When importing some data files, we found that they sometimes contained duplicate data. This caused errors because key constraints were being violated. This was indistinguishable from when the user tried to import the same file twice and we needed some way for the user to indicate what should happen in case of a duplicate. 
+
+As such whenever this occurs, by default the user is asked if they wish to skip this file, skip all files (Traffic Reporter 2013 can do batch importing), or continue processing the file. There is a user setting that lets you set the default option, skip, continue, or ask every time. Specifying a default option lets the user leave the application importing a large amount of files overnight, which is important because one file can take upwards of a minute to be processed, longer if there are duplicates.
 
 \subsection{New Features}
+
+In addition to improving existing features, we also added a few new features with the intention of increasing the efficiency of Auckland Transport's traffic engineer's workflows.
+
 \subsubsection{Suspected Faults}
+
+\begin{figure}[!b]
+\centerline{\includegraphics[width=3.1in]{faults}}
+\caption{View of Faults Screen}
+\label{fig:faults}
+\end{figure}
+
+Currently Auckland Transport relies on angry motorists calling and telling them that an intersection isn't phasing correctly. SCATS has no way of indicating that a detector may be faulty or not.
+
+The Faults mode (See Figure \ref{fig:faults}) lists all of the detectors grouped by intersection that have volume over the threshold in the date range specified in the Toolbar. The threshold defaults to 100 (the theoretical maximum volume in a 5 minute period) but can be changed.
+
 \subsubsection{Summaries}
 \subsubsection{CSV Exporting}
 
