@@ -1,0 +1,30 @@
+Summary 2
+
+Start date: Monday  March 11  2013
+End date: Thursday  March 14  2013
+Morning peak hour: 12 AM
+Evening peak hour: 12 PM
+
+Route Name,Inbound Intersection,Inbound Detectors,Inbound Dividing Factor,Outbound Intersection,Outbound Detectors,Outbound Dividing Factor
+New North Road,4001,1 2 3,1,4101,4 5,2
+Mount Eden Road,4109,1 2,1,4109,3 4,2
+Sandringham Road,4117,1 2,1,4117,3,1
+
+AM Peak Hour Volumes
+Date,New North Road,Mount Eden Road,Sandringham Road
+Monday March 11, 2013,17,2053,4103
+Tuesday March 12, 2013,11,2056,4102
+Wednesday March 13, 2013,16,15,9
+
+PM Peak Hour Volumes
+Date,New North Road,Mount Eden Road,Sandringham Road
+Monday March 11, 2013,57,2074,4135
+Tuesday March 12, 2013,71,60,51
+Wednesday March 13, 2013,46,43,55
+
+Total Traffic Volumes
+Date,New North Road,Mount Eden Road,Sandringham Road
+Monday March 11, 2013,14348,601499,1193124
+Tuesday March 12, 2013,14180,258475,381961
+Wednesday March 13, 2013,14454,14523,14649
+
