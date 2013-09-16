@@ -329,9 +329,16 @@ Our architecture can be described as comprising of two essential parts; a data s
 \subsection{Data Sources}
 Because there was a major focus on extensibility from our client and we originally wanted to create a web service, we abstracted the way our application gets its volume data and configurations. We do this using an interface appropriately called DataSource. This interface has methods for retrieving volume counts for a detector at a datetime, getting a list of intersections, getting a configuration by its name, etc. In our application we created an implementation of this interface that communicates with an SQLite database.
 
-If we later wanted to switch to retrieving data from a web service we would
+If we later wanted to switch to retrieving data from a web service we could write an implementation that sends HTTP requests to the server and then constructs objects the presentation logic understands from the JSON response.
+
+If we wanted to change the backing database from SQLite to SQL Server we could write an implementation that connects that does connects and executes SQL queries for that.
 
 \subsection{Presentation Logic}
+In our presentation logic there are 3 main components; the Toolbar, the Report Browser, and the content screen. The content screen  is a WPF UserControl that implements either the ViewScreen or ConfigurationScreen interfaces. These interfaces allow the screen to respond to and emit events that are sent and consumed by the Toolbar and Report Browser. For example, in the ViewScreen interface there is an event handler to respond to the date range being changed in the Toolbar. There is also an event handler declared to let a ViewScreen know when the selected report in the report browser changes.
+
+The ConfigurationScreen interface declares an event that lets the screen tell the rest of the application that a new configuration has been created and saved. This event is consumed by the report browser which can update its list of reports.
+
+The Report Browser and Toolbar are custom controls that are all contained by a MainWindow control that connects all the event and event handlers. The MainWindow also subscribes to some of the events from the Toolbar and Report Browser and emits events itself and is responsible for switching screens and giving the user access to application settings.
 
 \section{Reflections}
 \section{Conclusions}
