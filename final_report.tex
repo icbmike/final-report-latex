@@ -334,14 +334,32 @@ If we later wanted to switch to retrieving data from a web service we could writ
 If we wanted to change the backing database from SQLite to SQL Server we could write an implementation that connects that does connects and executes SQL queries for that.
 
 \subsection{Presentation Logic}
-In our presentation logic there are 3 main components; the Toolbar, the Report Browser, and the content screen. The content screen  is a WPF UserControl that implements either the ViewScreen or ConfigurationScreen interfaces. These interfaces allow the screen to respond to and emit events that are sent and consumed by the Toolbar and Report Browser. For example, in the ViewScreen interface there is an event handler to respond to the date range being changed in the Toolbar. There is also an event handler declared to let a ViewScreen know when the selected report in the report browser changes.
+In our presentation logic there are 3 main components; the Toolbar, the Report Browser, and the content screen. The content screen  is a WPF UserControl that implements either the ViewScreen or ConfigurationScreen interfaces. 
+
+These interfaces allow the screen to respond to and emit events that are sent and consumed by the Toolbar and Report Browser. For example, in the ViewScreen interface there is an event handler to respond to the date range being changed in the Toolbar. There is also an event handler declared to let a ViewScreen know when the selected report in the report browser changes.
 
 The ConfigurationScreen interface declares an event that lets the screen tell the rest of the application that a new configuration has been created and saved. This event is consumed by the report browser which can update its list of reports.
 
 The Report Browser and Toolbar are custom controls that are all contained by a MainWindow control that connects all the event and event handlers. The MainWindow also subscribes to some of the events from the Toolbar and Report Browser and emits events itself and is responsible for switching screens and giving the user access to application settings.
 
 \section{Reflections}
+In reflection there are some things that we would have done differently in the development of our solution and some things that we thought went very well.
+
+Our choice of using SQLite as our backing DataSource was perhaps not the best. We initially thought that the scale of our application would best be suited by a small database like SQLite. However, as we started having more complicated queries and requesting larger amounts of data more frequently we started seeing performance issues. 
+
+We thought that we could offload the database fetches to a worker thread to keep the UI reactive, but multiple threads and a file based database resulted in the database being locked every so often. 
+
+A more suitable replacement could be SQL Server, as it would integrate well with C\# and WPF, all of them being Microsoft products.
+
+Something we thought we did well was our development process and division of work. There weren't many times when my partner and I were blocked waiting on each other to complete something. We were able to break down the tasks so that there was always something that could be done instead of waiting. 
+
+When we did work together it was when we needed to make a key architectural or directional decision, or when one of us was finding a task difficult and needed a new perspective on the problem.
+
+Another element that was key to the success of our project, was our customer collaboration. Having regular feedback from an actual user of the original application let us know when we were actually creating features and workflows that were an improvement. Meeting every two weeks gave us time to do substantial work, but was short enough that we did not progress significantly in a bad direction.
+
 \section{Conclusions}
+
+
 
 \section{Future Work}
 
