@@ -359,9 +359,21 @@ Another element that was key to the success of our project, was our customer col
 
 \section{Conclusions}
 
+In conclusion, we were tasked with recreating the Traffic Reporter application using modern technologies with the goal of improving the features already existing in the application, and adding new features. 
 
+We created a standalone Windows application using C\# and the Windows Presentation Foundation. We replicated and improved upon the original Traffic Reporter's features and introduced some new features that will improve the effectiveness and efficiency of Auckland Transport's traffic engineers.
+
+Through customer collaboration and effective development processes we were able to create an application that we believe more than improves upon the original Traffic Reporter.
 
 \section{Future Work}
+
+In the future we would like to port the backing data source to a web service. This was our intial proposal that we thought would satisfy the extensibility non-functional requirement.
+
+More work can be done to have more intelligent fault detection. Currenly the fault detection only will find detectors with suspiciosly high volume counts. There are also situations where a faulty detector will report zero volume, the current logic will not detect these faults.
+
+We would liked to have indications in the two report views that a volume count could be faulty. In the table view we would have highlighted suspicious cells, in the graph view we would put a red dot where the point was suspicious.
+
+We would have liked to add the feature of exporting configurations so that traffic engineers could shared them instead of having to construct them each themselves.
 
 \bibliographystyle{IEEEtran}
 \bibliography{final_report}
